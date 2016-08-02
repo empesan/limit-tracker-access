@@ -1,0 +1,12 @@
+diff --git a/tracker.module b/tracker.module
+index ab3e748..da85f36 100644
+--- a/tracker.module
++++ b/tracker.module
+@@ -164,7 +164,8 @@ function _tracker_myrecent_access($account) {
+  * Access callback for user/%user/track.
+  */
+ function _tracker_user_access($account) {
+-  return user_view_access($account) && user_access('access content');
++  global $user;
++  return user_view_access($account) && user_access('access content') && (user_access('administer nodes') || $account->uid == $user->uid);
+ }
